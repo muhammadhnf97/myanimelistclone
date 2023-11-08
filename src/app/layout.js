@@ -1,6 +1,7 @@
-import { Inter, Nunito } from 'next/font/google'
+import { Nunito } from 'next/font/google'
 import './globals.css'
 import Navbar from './components/Navbar'
+import Providers from './context/providers'
 
 const nunito = Nunito({ subsets: ['latin']})
 
@@ -13,10 +14,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${nunito.className} bg-bgcolors`}>
-        <div className='flex flex-col justify-between'>
-        <Navbar />
-        {children}
-        </div>
+        <Providers>
+          <div className='flex flex-col justify-between'>
+          <Navbar />
+          <main className='mt-28'>
+            {children}
+          </main>
+          </div>
+        </Providers>
       </body>
     </html>
   )

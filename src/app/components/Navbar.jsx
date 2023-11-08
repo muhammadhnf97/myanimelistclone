@@ -68,7 +68,7 @@ const Navbar = () => {
 
   return (
     <>
-    <nav data-testid="navbar" className={`${scrolledStyle} w-full bg-white shadow-sm`}>
+    <nav data-testid="navbar" className={`fixed z-20 w-full bg-white shadow-sm`}>
         {/* Mobile Menu View */}
         { 
         showMobileMenu &&

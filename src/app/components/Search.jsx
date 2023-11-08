@@ -7,6 +7,7 @@ import { useDebounce } from 'use-debounce'
 import { RxCross1 } from 'react-icons/rx'
 import { FaMagnifyingGlass } from 'react-icons/fa6'
 import { TbMoodEmpty } from 'react-icons/tb'
+import Link from 'next/link'
 
 const getAnimeSearch = async(query, type) => {
     const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/${type}?q=${query}&&limit=5`)
@@ -29,7 +30,8 @@ const Search = ({ handleClickShowSearch }) => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        const newRoute = `/search?q=${searchEntry}`
+        handleClickShowSearch()
+        const newRoute = `/search?type=${searchFor}&q=${searchEntry}&page=1`
         router.push(newRoute)
     }
     
@@ -54,9 +56,10 @@ const Search = ({ handleClickShowSearch }) => {
             })
             .then(setSearchList([]))
         }
-    }, [searchDebounce])
+    }, [searchDebounce, searchFor])
 
   return (
+    <Link href={`/anime?id=${searchList.mal_id}`}>
     <div className='fixed top-0 w-full h-full bg-black flex items-start pt-10 justify-center bg-opacity-60 z-20'>
         <div className='w-full bg-white rounded-lg p-3 space-y-3 md:w-[40rem]'>
             <div className='w-full flex items-center justify-between text-sm'>
@@ -78,7 +81,8 @@ const Search = ({ handleClickShowSearch }) => {
                         value={searchEntry} 
                         placeholder={`Search for ${searchFor}`} 
                         className='w-full h-10 px-2 border-b outline-none'
-                        onChange={e=>handleChangeSearch(e)} />
+                        onChange={e=>handleChangeSearch(e)}
+                        autoFocus />
                     <button className='p-2 bg-primary text-white rounded-lg duration-150 hover:bg-secondary'><FaMagnifyingGlass /></button>
                 </div>
             </form>
@@ -112,6 +116,7 @@ const Search = ({ handleClickShowSearch }) => {
             </div>
         </div>
     </div>
+    </Link>
   )
 }
 
