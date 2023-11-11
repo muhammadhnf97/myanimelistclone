@@ -2,6 +2,7 @@ import { Nunito } from 'next/font/google'
 import './globals.css'
 import Navbar from './components/Navbar'
 import Providers from './context/providers'
+import Footer from './components/Footer'
 
 const nunito = Nunito({ subsets: ['latin']})
 
@@ -13,14 +14,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${nunito.className} bg-bgcolors`}>
+      <body className={`${nunito.className} bg-bgcolors flex flex-col justify-between min-h-screen`}>
         <Providers>
-          <div className='flex flex-col justify-between'>
           <Navbar />
-          <main className='mt-28'>
+          <main className='relative mt-28'>
             {children}
           </main>
-          </div>
+          <Footer />
         </Providers>
       </body>
     </html>

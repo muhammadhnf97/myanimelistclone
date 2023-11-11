@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FaMagnifyingGlass } from 'react-icons/fa6'
 import { FiMenu } from 'react-icons/fi'
 import Search from './Search'
@@ -18,11 +18,11 @@ const Navbar = () => {
         children: [{
             id: '1a',
             label: 'Top Anime',
-            path: '/anime/topanime'
+            path: '/topanime'
         },{
             id: '1b',
-            label: 'Anime Recomendation',
-            path: '/anime/recommendation'
+            label: 'Upcoming Anime',
+            path: '/upcoming'
         }]
     },
     {
@@ -31,35 +31,17 @@ const Navbar = () => {
         children: [{
             id: '2a',
             label: 'Top Manga',
-            path: '/manga/topmanga'
-        },{
-            id: '2b',
-            label: 'Manga Recomendation',
-            path: '/manga/recomendation'}]
+            path: '/topmanga'
+        }]
     }
     ]
 
     const pathname = usePathname()
-
-    const [isScrolled, setIsScrolled] = useState(false)
-    useEffect(()=>{
-        const handleScrolled = () => {
-            setIsScrolled(window.scrollY > 0 ? true : false)
-        }
-        window.addEventListener('scroll', handleScrolled)
-        return () => {
-            window.removeEventListener('scroll', handleScrolled)
-        }
-    }, [])
-
-    const scrolledStyle = isScrolled ? 'fixed z-20' : ''
-
     const [showMobileMenu, setMobileMenu] = useState(false)
     const handleClickMobileMenu = () => {
         setMobileMenu(prev=>!prev)
     }
     
-
     const [showSearch, setShowSearch] = useState(false)
 
     const handleClickShowSearch = () => {

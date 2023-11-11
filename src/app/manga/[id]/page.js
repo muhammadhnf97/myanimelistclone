@@ -7,12 +7,12 @@ import React, { useEffect, useState } from 'react'
 import { FaPlay } from 'react-icons/fa6'
 
 const getApi = async(id) => {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/anime/${id}`)
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/manga/${id}`)
   return response
 }
 
 const Page = ({ params: { id } }) => {
-    const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
     const [details, setDetails] = useState([])
 
     useEffect(()=>{
@@ -50,20 +50,20 @@ const Page = ({ params: { id } }) => {
             </div>
             <div>
               <h4 className='text-lg font-semibold border-b'>Alternative Title</h4>
-              <p className='text-sm'><span className='font-semibold text-primary'>English:</span> {details?.title_english || 'unknown'}</p>
-              <p className='text-sm'><span className='font-semibold text-primary'>Japanese:</span> {details?.title_japanese || 'unknown'}</p>
+              <p className='text-sm'><span className='font-semibold text-primary'>English:</span> {details?.title_english}</p>
+              <p className='text-sm'><span className='font-semibold text-primary'>Japanese:</span> {details?.title_japanese} </p>
             </div>
             <div>
               <h4 className='text-lg font-semibold border-b'>Information</h4>
               <p className='text-sm'><span className='font-semibold text-primary'>Type:</span> {details?.type || 'unknown'}</p>
-              <p className='text-sm'><span className='font-semibold text-primary'>Episodes:</span> {details?.episodes || 'unknown'} </p>
-              <p className='text-sm'><span className='font-semibold text-primary'>Status:</span> {details?.airing ? 'Currently Airing' : 'Finished'}</p>
-              <p className='text-sm'><span className='font-semibold text-primary'>Aired:</span> {details?.aired?.string || 'unknown'} </p>
-              <p className='text-sm'><span className='font-semibold text-primary'>Studios:</span> {details?.studios?.map(values=>(values.name)) || 'unknown'}</p>
-              <p className='text-sm'><span className='font-semibold text-primary'>Source:</span> {details?.source || 'unknown'}</p>
-              <p className='text-sm'><span className='font-semibold text-primary'>Genre:</span> {details?.genres?.map(values=>values.name) || 'unknown'}</p>
-              <p className='text-sm'><span className='font-semibold text-primary'>Duration:</span> {details?.duration || 'unknown'}.</p>
-              <p className='text-sm'><span className='font-semibold text-primary'>Rating:</span> {details?.rating || 'unknown'}</p>
+              <p className='text-sm'><span className='font-semibold text-primary'>Authors:</span> {details?.authors?.map(values=>(values.name)) || 'unknown'}</p>
+              <p className='text-sm'><span className='font-semibold text-primary'>Chapters:</span> {details?.chapters || 'unknown'} </p>
+              <p className='text-sm'><span className='font-semibold text-primary'>Volumes:</span> {details?.volumes || 'unknown'} </p>
+              <p className='text-sm'><span className='font-semibold text-primary'>Status:</span> {details?.status || 'unknown'}</p>
+              <p className='text-sm'><span className='font-semibold text-primary'>Serialization:</span> {details?.serializations?.map(values=>values.name) || 'unknown'}</p>
+              <p className='text-sm'><span className='font-semibold text-primary'>Genres:</span> {details?.genres?.map(values=>values.name) || 'unknown'}</p>
+              <p className='text-sm'><span className='font-semibold text-primary'>Themes:</span> {details?.themes?.map(values=>values.name) || 'unknown'}.</p>
+              <p className='text-sm'><span className='font-semibold text-primary'>Published:</span> {details?.published?.string || 'unknown'}</p>
             </div>
           </section>
           <section className='w-full space-y-3 md:w-4/5'>
@@ -81,18 +81,10 @@ const Page = ({ params: { id } }) => {
               </div>
             </div>
             <div className='flex flex-col gap-3 md:flex-row'>
-              <div className='flex-1 bg-slate-100 border border-slate-300 p-3 space-y-3'>
-                <div className='space-y-3'>
+              <div className='bg-slate-100 border border-slate-300 p-3 space-y-3'>
+                <div className='space-y-3 flex-1'>
                   <h4 className='text-lg font-bold text-primary'>Synopsis</h4>
-                  <p>{details?.synopsis || 'Unknown'}</p>
-                </div>
-              </div>
-              <div className='h-fit bg-slate-100 border border-slate-300 p-3 space-y-3'>
-                <h4 className='text-lg font-bold text-primary'>Trailer</h4>
-                <div className='relative w-full h-60 group md:w-96'>
-                  <Image src={details?.trailer?.images?.small_image_url} alt='image trailer' fill className='object-center object-cover' />
-                  <div className='invisible absolute w-full h-full bg-gray-400 group-hover:visible group-hover:mix-blend-multiply'></div>
-                  <button onClick={handleClickShowVideoPlayer}><FaPlay className='absolute text-red-500 w-16 h-16 right-1/2 top-1/2 translate-x-1/2 -translate-y-1/2 duration-150 group-hover:scale-110' /></button>
+                  <p>{details?.synopsis}</p>
                 </div>
               </div>
             </div>

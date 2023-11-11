@@ -14,7 +14,7 @@ const VideoPlayer = ({ videoId, handleClickShowVideoPlayer }) => {
          videoId={videoId}
          onReady={(e) => e.target.pauseVideo()}
          opts={options}
-         className='w-full h-full'
+         className='z-10'
          />
     </div>
   )

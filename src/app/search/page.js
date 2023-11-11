@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import AnimeCards from '../components/AnimeCard'
 import { FaMagnifyingGlass } from 'react-icons/fa6'
+import Link from 'next/link'
 
 const listOfAnimeByType = [{
   id: 1,
@@ -194,9 +195,10 @@ const Home = () => {
               <div className='grid grid-cols-1 gap-1 md:gap-3 md:grid-cols-4'>
                 {
                   listOfAnime.filter(values=>values.type === data.type).map((values, index)=>(
-                    <AnimeCards
-                    key={values.mal_id+index.toString()}
-                    values={values} />
+                    <Link href={`/${typeQuery}/${values.mal_id}`} key={values.mal_id + index.toString()}>
+                      <AnimeCards
+                      values={values} />
+                    </Link>
                   ))
                 }
               </div>

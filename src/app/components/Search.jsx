@@ -59,7 +59,6 @@ const Search = ({ handleClickShowSearch }) => {
     }, [searchDebounce, searchFor])
 
   return (
-    <Link href={`/anime?id=${searchList.mal_id}`}>
     <div className='fixed top-0 w-full h-full bg-black flex items-start pt-10 justify-center bg-opacity-60 z-20'>
         <div className='w-full bg-white rounded-lg p-3 space-y-3 md:w-[40rem]'>
             <div className='w-full flex items-center justify-between text-sm'>
@@ -83,27 +82,31 @@ const Search = ({ handleClickShowSearch }) => {
                         className='w-full h-10 px-2 border-b outline-none'
                         onChange={e=>handleChangeSearch(e)}
                         autoFocus />
-                    <button className='p-2 bg-primary text-white rounded-lg duration-150 hover:bg-secondary'><FaMagnifyingGlass /></button>
+                    <button className='p-2 bg-primary text-white rounded-lg duration-150 hover:bg-secondary'>
+                        <FaMagnifyingGlass />
+                    </button>
                 </div>
             </form>
             <div className='w-full max-h-[40rem] overflow-auto'>
                 {
                     searchList?.map(values=>(
-                        <div key={values?.mal_id} className='flex justify-start items-start gap-3 p-3 duration-150 cursor-pointer hover:rounded-lg hover:bg-secondary hover:text-white group'>
-                            <div className='relative w-16 h-24'>
-                                <Image src={values?.image_url} alt='' fill className='object-cover object-center' loading='lazy' />
-                            </div>
-                            <div className='relative flex-1 text-sm'>
-                                <h4 className='text-base text-tertiary font-semibold group-hover:text-blue-300'>{values?.title}</h4>
-                                <p className='text-slate-500'>{values?.type} {values?.rating}</p>
-                                <div className='absolute top-0 right-0 w-fit flex items-center gap-1 bg-black bg-opacity-60 p-1 rounded-lg'>
-                                    <AiFillStar className='text-yellow-300' />
-                                    <p className='text-white'>{values?.score}</p>
+                        <Link href={`/${searchFor}/${values.mal_id}`} onClick={handleClickShowSearch}>
+                            <div key={values?.mal_id} className='flex justify-start items-start gap-3 p-3 duration-150 cursor-pointer hover:rounded-lg hover:bg-secondary hover:text-white group'>
+                                <div className='relative w-16 h-24'>
+                                    <Image src={values?.image_url} alt='' fill className='object-cover object-center' loading='lazy' />
                                 </div>
-                                <p>{values?.synopsis?.length > 150 ? values?.synopsis?.slice(0, 150) + "..." : values?.synopsis}</p>
-                                {values?.synopsis?.length > 150 && <p className='text-blue-400'>{"Lihat lebih banyak"}</p>}
+                                <div className='relative flex-1 text-sm'>
+                                    <h4 className='text-base text-tertiary font-semibold group-hover:text-blue-300'>{values?.title}</h4>
+                                    <p className='text-slate-500'>{values?.type} {values?.rating}</p>
+                                    <div className='absolute top-0 right-0 w-fit flex items-center gap-1 bg-black bg-opacity-60 p-1 rounded-lg'>
+                                        <AiFillStar className='text-yellow-300' />
+                                        <p className='text-white'>{values?.score}</p>
+                                    </div>
+                                    <p>{values?.synopsis?.length > 150 ? values?.synopsis?.slice(0, 150) + "..." : values?.synopsis}</p>
+                                    {values?.synopsis?.length > 150 && <p className='text-blue-400'>{"Lihat lebih banyak"}</p>}
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     ))
                 }
                 { searchList.length < 1 && 
@@ -116,7 +119,6 @@ const Search = ({ handleClickShowSearch }) => {
             </div>
         </div>
     </div>
-    </Link>
   )
 }
 
