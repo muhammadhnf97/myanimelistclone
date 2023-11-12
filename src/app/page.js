@@ -18,7 +18,7 @@ export default function Home() {
   const [topAnime, setTopAnime] = useState([])
   const [animeReview, setAnimeReview] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [topAnimePagination, setTopAnimePagination] = useState({})
+  const [topAnimePagination, setTopAnimePagination] = useState(0)
 
   useEffect(()=>{
     getApi('/seasons/now?limit=5&&filter=tv')
@@ -81,7 +81,7 @@ export default function Home() {
               }
             })
           })
-          setTopAnimePagination(data.data.pagination)
+          setTopAnimePagination(data.data.pagination.last_visible_page)
         })
         .catch(setTopAnime([]))
       }, 1000)
@@ -122,7 +122,8 @@ export default function Home() {
   useEffect(()=>{
     if (animeReview.length > 0) {
       const random = setTimeout(()=>{
-        const randomNumber = Math.round(Math.random() * 10)
+        const randomNumber = Math.round(Math.random() * 1032)
+        console.log(randomNumber, topAnimePagination)
         getApi(`/top/anime?page=${randomNumber}&swf=true`)
         .then(data=>{
           setRandomAnimes(()=>{
