@@ -90,8 +90,8 @@ const Search = ({ handleClickShowSearch }) => {
             <div className='w-full max-h-[40rem] overflow-auto'>
                 {
                     searchList?.map(values=>(
-                        <Link href={`/${searchFor}/${values.mal_id}`} onClick={handleClickShowSearch}>
-                            <div key={values?.mal_id} className='flex justify-start items-start gap-3 p-3 duration-150 cursor-pointer hover:rounded-lg hover:bg-secondary hover:text-white group'>
+                        <Link href={`/${searchFor}/${values.mal_id}`} key={values?.mal_id} onClick={handleClickShowSearch}>
+                            <div className='flex justify-start items-start gap-3 p-3 duration-150 cursor-pointer hover:rounded-lg hover:bg-secondary hover:text-white group'>
                                 <div className='relative w-16 h-24'>
                                     <Image src={values?.image_url} alt='' fill className='object-cover object-center' loading='lazy' />
                                 </div>

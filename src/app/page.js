@@ -158,7 +158,7 @@ export default function Home() {
           <section className="w-full p-3 md:w-3/5">
             <section className="w-full">
               <div className="flex justify-between items-center py-2">
-                <h3 className="text-xl font-semibold">Current Seasons's Animes</h3>
+                <h3 className="text-xl font-semibold">Current Seasons&apos;s Animes</h3>
                 <Link href={'/'}><p className="text-sm text-blue-400">View more</p></Link>
               </div>
               <div className="w-full space-y-3 overflow-x-auto">
